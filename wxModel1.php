@@ -1,54 +1,51 @@
 <?php
 
-class wxModel
+class wxModel 
 {
 
-		public function valid()
-		{
+	public function valid() 
+	{
 
-			$echoStr = $_GET["echostr"];
+		$echoStr = $_GET["echostr"];
 
-			if ($this->checkSignature() ) {
+		if ( $this->checkSignature() ) {
 
-				echo $echoStr;
-				exit;
-			}
+			echo $echoStr;
+
+			exit;
+		}
+	}
+
+	private function checkSignature() 
+	{
+
+		if (!defined("TOKEN")) {
+
+			throw new Exception('TOKEN is not defined!');
 		}
 
-		private function checkSignature()
-		{
+		$signature = $_GET["signature"];
 
-			if (!defined("TOKEN")) {
+		$timestamp = $_GET["timestamp"];
 
-				throw new Exception('TOKEN is not defined!');
-			}
+		$nonce = $_GET["nonce"];
 
-			$singnature = $_GET["singnature"];
+		$token = TOKEN;
 
-			$timestamp = $_GET["timestamp"];
+		$tmpArr = array($token, $timestamp, $nonce);
 
-			$nonce = $_GET["nonce"];
+		sort($tmpArr, SORT_STRING);
 
-			$token = TOKEN;
+		$tmpStr = implode($tmpArr);
 
-			$tmpArr = array($token, $timestamp, $nonce);
+		$tmpStr = sha1($tmpStr);
 
-			sort($tmpArr, SORT_STRING);
+		if ( $tmpStr == $signature ) {
 
-			$tmpStr = implode($tmpArr);
+			return true;
+		} else {
 
-			$tmpStr = sha1($tmpStr);
-
-			if ( $tmpStr == $singnature ) {
-
-				return true;
-				
-			} else {
-
-				return false;
-			}
-
+			return false;
 		}
+	}
 }
-
-
