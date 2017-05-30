@@ -50,13 +50,15 @@
 
 		}
 	}*/
+class wxModel{
+
 
   	public function valid()
     {
         $echoStr = $_GET["echostr"];
 
         //valid signature , option
-        if ($this->checkSignature()) {
+        if ( $this->checkSignature() ) {
             echo $echoStr;
             exit;
         }
@@ -93,3 +95,5 @@
             return false;
         }
     }
+
+}
