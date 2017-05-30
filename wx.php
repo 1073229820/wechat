@@ -1,5 +1,5 @@
 <?php
-include './wxModel1.php';
+include './wxModel.php';
 //define your token
 define("TOKEN", "xdl2017");
 $wechatObj = new wxModel();
