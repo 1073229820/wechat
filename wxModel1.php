@@ -51,7 +51,7 @@
 		}
 	}*/
 
-    public function valid()
+  	public function valid()
     {
         $echoStr = $_GET["echostr"];
 
@@ -62,8 +62,7 @@
         }
     }
 
-      /*
-     * 验证服务器地址的有效性*/
+      
     private function checkSignature()
     {
         /*
