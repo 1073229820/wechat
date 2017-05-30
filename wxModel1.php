@@ -1,21 +1,21 @@
 <?php
 
-	class wxModel
-	{
+class wxModel
+{
 
 		public function valid()
 		{
 
-			$echoStr = $_GET['echostr'];
+			$echoStr = $_GET["echostr"];
 
-			if ($this->checkSignature) {
+			if ($this->checkSignature() ) {
 
 				echo $echoStr;
 				exit;
 			}
 		}
 
-		private funcjtion checkSignature()
+		private function checkSignature()
 		{
 
 			if (!defined("TOKEN")) {
@@ -23,7 +23,7 @@
 				throw new Exception('TOKEN is not defined!');
 			}
 
-			$singnature = $_GET['singnature'];
+			$singnature = $_GET["singnature"];
 
 			$timestamp = $_GET["timestamp"];
 
@@ -37,7 +37,7 @@
 
 			$tmpStr = implode($tmpArr);
 
-			$tmpStr = shal($tmpStr);
+			$tmpStr = sha1($tmpStr);
 
 			if ( $tmpStr == $singnature ) {
 
@@ -49,6 +49,6 @@
 			}
 
 		}
-	}
+}
 
 
