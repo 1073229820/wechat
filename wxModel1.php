@@ -3,19 +3,19 @@
 	class wxModel
 	{
 
-		public function vaild()
+		public function valid()
 		{
 
 			$echoStr = $_GET['echoStr'];
 
-			if ($this->checkSignation) {
+			if ($this->checkSignature) {
 
 				echo $echoStr;
 				exit;
 			}
 		}
 
-		private function checkSignation()
+		private funcjtion checkSignature()
 		{
 
 			if (!defined("TOKEN")) {
