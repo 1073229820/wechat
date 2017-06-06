@@ -174,10 +174,49 @@ EOT;
 							</xml>
 
 EOT;
+					$time = time();
 
+					$msgtype = 'image';
+
+					$mediaid = 'ct-O3zSCuglOSHxQV42vdm3pKKNF_YHDcNFQtxUp9HyyeVIMmmowtlJv7yAyJ5Bh';
+
+					$retStr = sprintf($str, $fromusername, $tousername, $time, $msgtype, $mediaid);
+
+					echo $retStr;
 
 				}
 			}
+
+			//判断是否是推送事件
+			if ( $msgtype == 'event' ) {
+
+					$event = $postObj->Event;
+
+					//第一次订阅后发送的消息
+					if ( $event == 'subscribe' ) {
+
+						$str = "<xml>
+									<ToUserName><![CDATA[%s]]></ToUserName>
+									<FromUserName><![CDATA[%s]]></FromUserName>
+									<CreateTime>%s</CreateTime>
+									<MsgType><![CDATA[%s]]></MsgType>
+									<Content><![CDATA[%s]]></Content>
+								</xml>";
+
+						$time = time();
+
+						$msgtype = 'text';
+
+						$content = '欢迎来到微信公众号的开发世界';
+
+						$retStr = sprintf($str, $fromusername, $tousername, $time, $msgtype, $content);
+
+						echo $retStr;
+
+
+					}
+				}
+			
 		}
 	}
 }
